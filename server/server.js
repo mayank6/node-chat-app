@@ -16,12 +16,11 @@ io.on('connection',(socket)=>{
   //after connection broadcast to other users on same emit listener
   socket.broadcast.emit("newMessage",generateMessage('Admin',"New User Joined"));
 
-  socket.on('createMessage',(message)=>{
+  socket.on('createMessage',(message,callback)=>{
     console.log("message",message);
 
-
-
     io.emit("newMessage",generateMessage(message.from,message.text))
+    callback("Hey hey");
   });
 
   socket.on('disconnect',()=>{
